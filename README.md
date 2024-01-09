@@ -1,3 +1,3 @@
-# ashleyty
+# DataDetectives
 Ashely Ridley
 Ty Johnson
