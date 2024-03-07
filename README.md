@@ -9,4 +9,4 @@ Video Link: https://video.bellarmine.edu/media/AFL+Presentation/1_23mmws5r
 Video Link: https://video.bellarmine.edu/media/Capo+Presentation/1_lqaa9dv1
 
 ## Chemical Manufacturing Analysis
-Video Link:
+Video Link: https://video.bellarmine.edu/media/Chemical+Manufacturing+Analysis/1_8x6yenim
