@@ -23,9 +23,12 @@ with tab2:
     st.header('Dataset Viewer')
     columns = st.radio('Choose Dataset View:', ['Chemical', 'Alcohol', 'Quality', 'All'])
     if columns == 'Chemical':
-        st.write(df['color'])
+        st.write(df[['color', 'fixed_acidity', 'volatile_acidity', 'citric_acid', 'chlorides',
+                    'free_sulfur_dioxide', 'density', 'pH', 'sulphates']])
     elif columns == 'Alcohol':
-        st.write(df['volatile_acidity'])
+        st.write(df[['color', 'alcohol']])
+    elif columns == 'Quality':
+        st.write(df[['color', 'quality']])
     else: 
         st.write(df)
 
