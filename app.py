@@ -6,6 +6,7 @@ from ucimlrepo import fetch_ucirepo
 wine_quality = fetch_ucirepo(id=186) 
 df = wine_quality.data.original
 
+
 X = wine_quality.data.features 
 y = wine_quality.data.targets 
 
@@ -14,9 +15,9 @@ st.title('Wine Quality Viewer')
 
 tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs(['Metadata', 'Data', 'Color', 'Quality', 'Scatter', 'Box', 'Classification'])
 with tab1:
-    st.write('Hello World')
-    st.write(wine_quality)
-    st.write(wine_quality.color)
+    st.header('Metadata')
+    st.write(wine_quality.variables)
+    
 
 
 with tab2: 
