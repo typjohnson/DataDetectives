@@ -1,14 +1,23 @@
 import streamlit as st
 import pandas as pd
 from ucimlrepo import fetch_ucirepo 
+
+
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
+from sklearn.metrics import classification_report
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
   
 # fetch dataset 
 wine_quality = fetch_ucirepo(id=186) 
 df = wine_quality.data.original
 
 
-X = wine_quality.data.features 
-y = wine_quality.data.targets 
+
 
 #Page title
 st.title('Wine Quality Viewer')
@@ -36,9 +45,27 @@ with tab2:
     
 with tab3:
     st.header('Color Distribution')
+    # fig = plt.figure(figsize= (12,6))
+    # sns.countplot(x = 'color', data = df, color ='blue')
+    # st.pyplot(fig)
+
+    wine_type_counts = df['color'].value_counts()
+    fig, ax = plt.subplots()
+    wine_type_counts.plot(kind='bar', ax=ax)
+    ax.set_xlabel('Wine Color')
+    ax.set_ylabel('Number of Wines')
+    ax.set_title('Count by Wine Type')  
+    st.pyplot(fig)
 
 with tab4:
     st.header('Quality Distribution')
+    fig, ax = plt.subplots()
+    wine_quality_counts = df['quality'].value_counts(sort=False)
+    wine_quality_counts.plot(kind='bar', ax =ax)
+    ax.set_xlabel('Wine Quality')
+    ax.set_ylabel('Number of Wines')
+    ax.set_title('Count by Wine Quality')
+    st.pyplot(fig)
 
 with tab5:
     st.header('Scatter Plots')
@@ -53,6 +80,8 @@ with tab5:
     check_9 = st.checkbox('pH')
     check_10 = st.checkbox('sulphates')
     check_11 = st.checkbox('alcohol')
+    
+
 
 with tab6: 
     st.header('Box Plots')
@@ -61,11 +90,30 @@ with tab6:
                                                    'residual_sugar', 'chlorides', 'free_sulfur_dioxide',
                                                      'total_sulfur', 'density', 'pH',
                                                        'sulphates', 'alcohol'], index = None)
-
+    plt.figure(figsize=(8, 6))
+    sns.boxplot(data=df, y=columns, orient='v')
+    st.pyplot(plt)
+    
+       
 
 with tab7:
     st.header('Classification')
     st.write('Classification Report')
+    
+    X = wine_quality.data.features 
+    y = wine_quality.data.targets 
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=1)
+    classifier=LogisticRegression(max_iter=1000)
+    classifier.fit(X_train.values,y_train.values.ravel())
+    y_pred = classifier.predict(X_test.values)
+    report = classification_report(y_test,y_pred)
+    st.table(report)
+    
+    
+
+
+
+
    
    
 
