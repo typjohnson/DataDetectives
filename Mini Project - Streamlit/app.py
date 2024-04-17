@@ -42,7 +42,9 @@ with tab2:
     elif columns == 'Quality':
         st.write(df[['color', 'quality']])
     else: 
-        st.write(df)
+        #putting the color column first and adding the rest of the dataset
+        cols = ['color'] + [col for col in df.columns if col != 'color']
+        st.write(df[cols])
 
     
 with tab3:
